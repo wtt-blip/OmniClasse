@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluxoSaberes Kids | ODS 4</title>
+    
+    <style>
+        :root {
+            --primary: #1a5276;    /* Azul Principal */
+            --secondary: #27ae60;  /* Verde ODS 4 */
+            --kids-yellow: #f1c40f;/* Amarelo Diversão */
+            --kids-red: #e74c3c;   /* Vermelho Incentivo */
+            --bg: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Comic Sans MS', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Menu para evitar distrações */
+        nav {
+            background: white;
+            width: 100%;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav button {
+            background: #ebf5fb;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav button.active-nav {
+            background: var(--primary);
+            color: white;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 100%;
+            padding: 40px 0 60px 0;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        header h1 { margin: 0; font-size: 2.5rem; }
+
+        main {
+            max-width: 800px;
+            width: 90%;
+            margin: -30px auto 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            display: none; /* Escondido por padrão */
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .card.active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Área de Vídeo */
+        .video-box {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #000;
+            margin: 20px 0;
+        }
+
+        .video-box iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* Botões Estilo Kids */
+        .btn-kid {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            font-size: 1.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 5px 0 #1e8449;
+            transition: 0.2s;
+        }
+
+        .btn-kid:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #1e8449;
+        }
+
+        .btn-red { background: var(--kids-red); box-shadow: 0 5px 0 #c0392b; }
+
+        #feedback {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            min-height: 1.5em;
+        }
+
+        footer { padding: 20px; color: #7f8c8d; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button id="btn-home" class="active-nav" onclick="irPara('home')">🏠 Início</button>
+        <button id="btn-video" onclick="irPara('video')">🎬 Vídeos TDH</button>
+        <button id="btn-jogo" onclick="irPara('jogo')">🎮 Desafio</button>
+    </nav>
+
+    <header>
+        <h1>FluxoSaberes Kids</h1>
+        <p>Aprender é a maior das aventuras! 🌟</p>
+    </header>
+
+    <main>
+        <section id="home" class="card active">
+            <h2>Bem-vindo, pequeno explorador!</h2>
+            <p>O FluxoSaberes ajuda crianças de todo o mundo a ter uma <strong>Educação de Qualidade (ODS 4)</strong>.</p>
+            <p>Escolha uma atividade no menu acima para começar!</p>
+        </section>
+
+        <section id="video" class="card">
+            <h2>Canto do Aprendizado 📺</h2>
+            <p>Vídeos curtos e divertidos para você focar e aprender!</p>
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/P7m_01pni_M" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p><em>Dica: Assista uma vez e tente contar para alguém o que você aprendeu!</em></p>
+        </section>
+
+        <section id="jogo" class="card">
+            <h2>Desafio Relâmpago ⚡</h2>
+            <p>A ODS 4 diz que a educação deve ser para...</p>
+            <div>
+                <button class="btn-kid btn-red" onclick="jogar(false)">Só para alguns</button>
+                <button class="btn-kid" onclick="jogar(true)">Para TODO MUNDO!</button>
+            </div>
+            <div id="feedback"></div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 FluxoSaberes | Criado para transformar a Educação
+    </footer>
+
+    <script>
+        // Função para trocar de abas
+        function irPara(aba) {
+            // Esconde todos os cards
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+            // Desativa botões do nav
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-nav'));
+            
+            // Ativa a aba e o botão certo
+            document.getElementById(aba).classList.add('active');
+            document.getElementById('btn-' + (aba === 'home' ? 'home' : aba === 'video' ? 'video' : 'jogo')).classList.add('active-nav');
+        }
+
+        // Lógica do Jogo
+        function jogar(acertou) {
+            const fb = document.getElementById('feedback');
+            if(acertou) {
+                fb.innerHTML = "🌟 CORRETO! Você é demais! 🌟";
+                fb.style.color = "var(--secondary)";
+            } else {
+                fb.innerHTML = "Tente de novo! A educação é um direito de todos! 💪";
+                fb.style.color = "var(--kids-red)";
+            }
+        }
+    </script>
+</body>
+</html>

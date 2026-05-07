@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluxoSaberes | ODS 4</title>
+    
+    <style>
+        :root {
+            --primary-color: #1a5276; /* Azul Tecnológico */
+            --secondary-color: #27ae60; /* Verde ODS 4 */
+            --accent-color: #f39c12; /* Amarelo Atenção */
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-color);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 100%;
+            padding: 60px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        main {
+            max-width: 800px;
+            width: 90%;
+            margin: -30px auto 40px auto; /* Sobe um pouco o conteúdo sobre o header */
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .quiz-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        @media (min-width: 600px) {
+            .options { grid-template-columns: 1fr 1fr; }
+        }
+
+        button {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        #resultado {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: none; /* Escondido até responder */
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 30px;
+            text-align: center;
+            color: #7f8c8d;
+            border-top: 1px solid #ddd;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FluxoSaberes</h1>
+        <p>Educação de Qualidade: O Fluxo que Transforma</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2 class="quiz-title">🧩 Teste seu Conhecimento ODS 4</h2>
+            <p>O que define uma educação de qualidade segundo a ONU?</p>
+            
+            <div class="options">
+                <button onclick="verificar('errado')">Apenas ter prédios bonitos</button>
+                <button onclick="verificar('correto')">Inclusão, equidade e aprendizado contínuo</button>
+                <button onclick="verificar('errado')">Uso obrigatório de robôs</button>
+                <button onclick="verificar('errado')">Apenas notas altas em provas</button>
+            </div>
+
+            <div id="resultado"></div>
+        </section>
+
+        <section class="card">
+            <h2>Nossa Missão</h2>
+            <p>O <strong>FluxoSaberes</strong> utiliza tecnologia para democratizar o acesso à informação, ajudando a cumprir a meta global de uma educação inclusiva para todos até 2030.</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 FluxoSaberes | Projeto focado na ODS 4
+    </footer>
+
+    <script>
+        function verificar(resposta) {
+            const display = document.getElementById('resultado');
+            display.style.display = "block";
+            
+            if (resposta === 'correto') {
+                display.innerHTML = "✅ RESPOSTA CORRETA!<br>A ODS 4 foca em garantir que ninguém fique de fora do sistema educacional, independentemente de sua condição.";
+                display.style.backgroundColor = "#d4edda";
+                display.style.color = "#155724";
+            } else {
+                display.innerHTML = "❌ TENTE NOVAMENTE...<br>Dica: Pense no coletivo e na inclusão de todos os grupos sociais.";
+                display.style.backgroundColor = "#f8d7da";
+                display.style.color = "#721c24";
+            }
+        }
+    </script>
+
+</body>
+</html>
